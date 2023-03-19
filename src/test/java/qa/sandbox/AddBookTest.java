@@ -26,22 +26,41 @@ public class AddBookTest {
         options.addArguments("--remote-allow-origins=*");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        login("johny", "Qwerty1!");
+    }
+
+    private void login(String username, String password) {
+        driver.get("https://demoqa.com/login");
+        driver.findElement(By.id("userName")).sendKeys(username);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("login")).click();
+        new WebDriverWait(driver,
+                Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[text()='Log out']"))));
     }
 
     @Test
     public void addBookTest() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        goToBookStore(js);
+        goToBookProfile();
+        addBookToCollection(js);
+        goToProfile(js);
+    }
 
-        driver.get("https://demoqa.com/login");
-        driver.findElement(By.id("userName")).sendKeys("johny");
-        driver.findElement(By.id("password")).sendKeys("Qwerty1!");
-        driver.findElement(By.id("login")).click();
-        new WebDriverWait(driver,
-                Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[text()='Log out']"))));
-        js.executeScript("arguments[0].click();", driver.findElement(By.xpath("(//li[@id=\"item-2\"])[5]")));
+    private void goToBookProfile() {
         driver.findElement(By.xpath("//span[@id='see-book-Git Pocket Guide']/a")).click();
+    }
+
+    private void addBookToCollection(JavascriptExecutor js) {
         js.executeScript("arguments[0].click();",driver.findElement(By.xpath("//div[@class='text-right fullButton']")));
+    }
+
+    private void goToProfile(JavascriptExecutor js) {
         js.executeScript("arguments[0].click();",driver.findElement(By.xpath("//span[text()='Profile']")));
+    }
+
+    private void goToBookStore(JavascriptExecutor js) {
+        js.executeScript("arguments[0].click();", driver.findElement(By.xpath("//li[span[text()='Book Store']]")));
     }
 
     @AfterMethod
