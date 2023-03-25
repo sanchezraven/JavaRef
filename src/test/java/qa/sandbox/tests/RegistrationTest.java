@@ -2,7 +2,7 @@ package qa.sandbox.tests;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
-import qa.sandbox.appmanager.RegData;
+import qa.sandbox.model.RegData;
 
 public class RegistrationTest extends TestBase{
 

@@ -7,18 +7,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SessionHelper {
-    private WebDriver driver;
+public class SessionHelper extends HelperBase{
 
     public SessionHelper(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void login(String username, String password) {
         driver.get("https://demoqa.com/login");
-        driver.findElement(By.id("userName")).sendKeys(username);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login")).click();
+        type(By.id("userName"), username);
+        type(By.id("password"), password);
+        click(By.id("login"));
         new WebDriverWait(driver,
                 Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[text()='Log out']"))));
     }

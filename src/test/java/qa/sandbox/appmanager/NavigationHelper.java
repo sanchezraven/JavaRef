@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-    private WebDriver driver;
+public class NavigationHelper extends HelperBase{
 
     public NavigationHelper(WebDriver driver) {
-        this.driver = driver;
+        super (driver);
     }
 
     public void goToProfile(JavascriptExecutor js) {
@@ -16,11 +15,12 @@ public class NavigationHelper {
     }
 
     public void goToBookProfile() {
-        driver.findElement(By.xpath("//span[@id='see-book-Git Pocket Guide']/a")).click();
+        click(By.xpath("//span[@id='see-book-Git Pocket Guide']/a"));
     }
 
     public void goToRegForm() {
-        driver.findElement(By.xpath("//div[text()='Forms']")).click();
-        driver.findElement(By.xpath("//span[text()='Practice Form']")).click();
+        click(By.xpath("//div[text()='Forms']"));
+        click(By.xpath("//span[text()='Practice Form']"));
     }
+
 }
