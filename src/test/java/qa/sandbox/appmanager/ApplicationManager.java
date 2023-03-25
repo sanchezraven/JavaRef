@@ -11,6 +11,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private CollectionBookHelper collectionBookHelper;
+    private RegHelper regHelper;
 
     public void init() {
         ChromeOptions options = new ChromeOptions();
@@ -19,6 +20,7 @@ public class ApplicationManager {
         setDriver(WebDriverManager.chromedriver().capabilities(options).create());
         getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         sessionHelper = new SessionHelper(getDriver());
+        regHelper = new RegHelper(getDriver());
         collectionBookHelper = new CollectionBookHelper(getDriver());
         navigationHelper = new NavigationHelper(getDriver());
         sessionHelper.login("johny", "Qwerty1!");
@@ -44,5 +46,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-
+    public RegHelper getRegHelper() {
+        return regHelper;
+    }
 }

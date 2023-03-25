@@ -18,4 +18,9 @@ public class NavigationHelper {
     public void goToBookProfile() {
         driver.findElement(By.xpath("//span[@id='see-book-Git Pocket Guide']/a")).click();
     }
+
+    public void goToRegForm() {
+        driver.findElement(By.xpath("//div[text()='Forms']")).click();
+        driver.findElement(By.xpath("//span[text()='Practice Form']")).click();
+    }
 }
