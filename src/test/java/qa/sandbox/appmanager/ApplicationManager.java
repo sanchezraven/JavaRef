@@ -3,6 +3,8 @@ package qa.sandbox.appmanager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.Browser;
+
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -12,12 +14,25 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private CollectionBookHelper collectionBookHelper;
     private RegHelper regHelper;
+    private Browser browser;
+
+    public ApplicationManager(Browser browser) {
+
+        this.browser = browser;
+    }
 
     public void init() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--remote-allow-origins=*");
-        setDriver(WebDriverManager.chromedriver().capabilities(options).create());
+        if (browser == Browser.CHROME) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--remote-allow-origins=*");
+            setDriver(WebDriverManager.chromedriver().capabilities(options).create());
+        } else if (browser == Browser.FIREFOX) {
+            setDriver(WebDriverManager.firefoxdriver().create());
+        } else if (browser == Browser.EDGE) {
+            setDriver(WebDriverManager.edgedriver().create());
+        }
+
         getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         sessionHelper = new SessionHelper(getDriver());
         regHelper = new RegHelper(getDriver());
