@@ -2,6 +2,7 @@ package qa.sandbox.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
@@ -23,5 +24,14 @@ public class HelperBase {
 
     protected void click(By locator) {
         driver.findElement(locator).click();
+    }
+
+    public boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return  false;
+        }
     }
 }

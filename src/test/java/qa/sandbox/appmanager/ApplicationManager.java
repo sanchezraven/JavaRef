@@ -22,14 +22,14 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if (browser == Browser.CHROME) {
+        if (browser.equals(Browser.CHROME)) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             options.addArguments("--remote-allow-origins=*");
             setDriver(WebDriverManager.chromedriver().capabilities(options).create());
-        } else if (browser == Browser.FIREFOX) {
+        } else if (browser.equals(Browser.FIREFOX)) {
             setDriver(WebDriverManager.firefoxdriver().create());
-        } else if (browser == Browser.EDGE) {
+        } else if (browser.equals(Browser.EDGE)) {
             setDriver(WebDriverManager.edgedriver().create());
         }
 
