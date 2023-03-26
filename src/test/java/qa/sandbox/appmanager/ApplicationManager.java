@@ -26,6 +26,7 @@ public class ApplicationManager {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--incognito");
             setDriver(WebDriverManager.chromedriver().capabilities(options).create());
         } else if (browser.equals(Browser.FIREFOX)) {
             setDriver(WebDriverManager.firefoxdriver().create());
