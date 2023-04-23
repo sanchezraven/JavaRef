@@ -25,15 +25,15 @@ public class CollectionBookHelper extends HelperBase{
         jsClick(js, By.xpath("//li[span[text()='Book Store']]"));
     }
 
-    public void deleteBook() {
-        click(By.id("delete-record-undefined"));
+    public void deleteBook(int index) {
+        driver.findElements(By.id("delete-record-undefined")).get(index).click();
         click(By.id("closeSmallModal-ok"));
         new WebDriverWait(driver, Duration.ofSeconds(5)).until((ExpectedConditions.alertIsPresent()));
         driver.switchTo().alert().accept();
     }
 
-    public void goToBookProfile() {
-        click(By.xpath("//span[@class='mr-2']/a"));
+    public void goToBookProfile(int index) {
+        driver.findElements(By.xpath("//span[@class='mr-2']/a")).get(index).click();
     }
 
     public void goToProfile(JavascriptExecutor js) {
@@ -42,7 +42,7 @@ public class CollectionBookHelper extends HelperBase{
 
     public void addBook(JavascriptExecutor js) {
         goToBookStore(js);
-        goToBookProfile();
+        goToBookProfile(0);
         addBookToCollection(js);
         goToProfile(js);
     }

@@ -14,7 +14,7 @@ public class DeleteBookTest extends TestBase{
             app.getCollectionBookHelper().addBook(js);
         }
         int before = app.getCollectionBookHelper().getBookCount();
-        app.getCollectionBookHelper().deleteBook();
+        app.getCollectionBookHelper().deleteBook(0);
         int after = app.getCollectionBookHelper().getBookCount();
         Assert.assertEquals(after, before - 1);
     }
