@@ -28,10 +28,12 @@ public class CollectionBookHelper extends HelperBase{
     public void deleteBook() {
         click(By.id("delete-record-undefined"));
         click(By.id("closeSmallModal-ok"));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until((ExpectedConditions.alertIsPresent()));
+        driver.switchTo().alert().accept();
     }
 
     public void goToBookProfile() {
-        click(By.xpath("//span[@id='see-book-Git Pocket Guide']/a"));
+        click(By.xpath("//span[@class='mr-2']/a"));
     }
 
     public void goToProfile(JavascriptExecutor js) {
@@ -43,10 +45,13 @@ public class CollectionBookHelper extends HelperBase{
         goToBookProfile();
         addBookToCollection(js);
         goToProfile(js);
-
     }
 
     public boolean isThereABook() {
         return isElementPresent(By.xpath("//div[@class='rt-td']/img"));
+    }
+
+    public int getBookCount() {
+        return driver.findElements(By.xpath("//div[@role='rowgroup']//img")).size();
     }
 }

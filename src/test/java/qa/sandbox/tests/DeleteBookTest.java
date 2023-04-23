@@ -1,6 +1,7 @@
 package qa.sandbox.tests;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DeleteBookTest extends TestBase{
@@ -12,7 +13,10 @@ public class DeleteBookTest extends TestBase{
         if (! app.getCollectionBookHelper().isThereABook()) {
             app.getCollectionBookHelper().addBook(js);
         }
+        int before = app.getCollectionBookHelper().getBookCount();
         app.getCollectionBookHelper().deleteBook();
+        int after = app.getCollectionBookHelper().getBookCount();
+        Assert.assertEquals(after, before - 1);
     }
 
 
