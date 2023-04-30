@@ -1,20 +1,20 @@
 package qa.sandbox.tests;
 
 import org.openqa.selenium.remote.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import qa.sandbox.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(Browser.CHROME);
+    protected static final ApplicationManager app = new ApplicationManager(Browser.CHROME);
 
-    @BeforeMethod
+    @BeforeSuite
     public void setUp() {
         app.init();
     }
 
-    @AfterMethod
+    @AfterSuite
     public void tearDown() {
         app.stop();
     }

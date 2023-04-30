@@ -3,10 +3,13 @@ package qa.sandbox.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionBookHelper extends HelperBase{
 
@@ -53,5 +56,12 @@ public class CollectionBookHelper extends HelperBase{
 
     public int getBookCount() {
         return driver.findElements(By.xpath("//div[@role='rowgroup']//img")).size();
+    }
+
+    public List<WebElement> getBookList() {
+        List<WebElement> books = new ArrayList<>();
+        List<WebElement> elements = driver.findElements(By.xpath("//span[@class='mr-2']/a"));
+        books.addAll(elements);
+        return books;
     }
 }
