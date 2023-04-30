@@ -13,19 +13,19 @@ public class DeleteBookTest extends TestBase{
     @BeforeMethod
     public void ensurePreconditions() {
         JavascriptExecutor js = (JavascriptExecutor) app.getDriver();
-        app.getCollectionBookHelper().goToProfile(js);
-        if (! app.getCollectionBookHelper().isThereABook()) {
-            app.getCollectionBookHelper().addBook(js);
+        app.goTo().Profile(js);
+        if (app.collectionBook().list().size() == 0) {
+            app.collectionBook().add(js);
         }
     }
 
     @Test
     public void deleteBookTest() {
-        List<WebElement> before = app.getCollectionBookHelper().getBookList();
+        List<WebElement> before = app.collectionBook().list();
         int index = before.size() - 1;
-        app.getCollectionBookHelper().deleteBook(0);
-        List<WebElement> after = app.getCollectionBookHelper().getBookList();
-        Assert.assertEquals(after.size(), index);
+        app.collectionBook().delete(0);
+        List<WebElement> after = app.collectionBook().list();
+        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
         for (int i = 0; i < index; i++){

@@ -14,10 +14,11 @@ public class AddBookTest extends TestBase {
     @Test
     public void addBookTest() {
 
-        List<WebElement> before = app.getCollectionBookHelper().getBookList();
+        List<WebElement> before = app.collectionBook().list();
         JavascriptExecutor js = (JavascriptExecutor) app.getDriver();
-        app.getCollectionBookHelper().addBook(js);
-        List<WebElement> after = app.getCollectionBookHelper().getBookList();
+        app.collectionBook().add(js);
+        app.goTo().Profile(js);
+        List<WebElement> after = app.collectionBook().list();
         Assert.assertEquals(after.size(), before.size() + 1);
         Assert.assertTrue(app.getRegHelper().isElementPresent(By.xpath("//div[@class='rt-td']/img")));
     }

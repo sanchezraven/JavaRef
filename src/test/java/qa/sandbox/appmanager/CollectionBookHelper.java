@@ -28,7 +28,7 @@ public class CollectionBookHelper extends HelperBase{
         jsClick(js, By.xpath("//li[span[text()='Book Store']]"));
     }
 
-    public void deleteBook(int index) {
+    public void delete(int index) {
         driver.findElements(By.id("delete-record-undefined")).get(index).click();
         click(By.id("closeSmallModal-ok"));
         new WebDriverWait(driver, Duration.ofSeconds(5)).until((ExpectedConditions.alertIsPresent()));
@@ -39,15 +39,12 @@ public class CollectionBookHelper extends HelperBase{
         driver.findElements(By.xpath("//span[@class='mr-2']/a")).get(index).click();
     }
 
-    public void goToProfile(JavascriptExecutor js) {
-        js.executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Profile']")));
-    }
 
-    public void addBook(JavascriptExecutor js) {
+
+    public void add(JavascriptExecutor js) {
         goToBookStore(js);
         goToBookProfile(0);
         addBookToCollection(js);
-        goToProfile(js);
     }
 
     public boolean isThereABook() {
@@ -58,7 +55,7 @@ public class CollectionBookHelper extends HelperBase{
         return driver.findElements(By.xpath("//div[@role='rowgroup']//img")).size();
     }
 
-    public List<WebElement> getBookList() {
+    public List<WebElement> list() {
         List<WebElement> books = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//span[@class='mr-2']/a"));
         books.addAll(elements);

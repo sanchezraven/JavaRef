@@ -46,7 +46,7 @@ public class ApplicationManager {
         getDriver().quit();
     }
 
-    public CollectionBookHelper getCollectionBookHelper() {
+    public CollectionBookHelper collectionBook() {
         return collectionBookHelper;
     }
 
@@ -58,7 +58,7 @@ public class ApplicationManager {
         this.driver = driver;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
