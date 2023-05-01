@@ -8,6 +8,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 public class DeleteBookTest extends TestBase{
 
     @BeforeMethod
@@ -24,8 +27,8 @@ public class DeleteBookTest extends TestBase{
         List<WebElement> before = app.collectionBook().list();
         int index = before.size() - 1;
         app.collectionBook().delete(0);
+        assertThat(app.collectionBook().count(), equalTo(before.size() - 1));
         List<WebElement> after = app.collectionBook().list();
-        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
         for (int i = 0; i < index; i++){

@@ -51,7 +51,7 @@ public class CollectionBookHelper extends HelperBase{
         return isElementPresent(By.xpath("//div[@class='rt-td']/img"));
     }
 
-    public int getBookCount() {
+    public int count() {
         return driver.findElements(By.xpath("//div[@role='rowgroup']//img")).size();
     }
 
